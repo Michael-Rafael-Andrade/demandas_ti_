@@ -6,6 +6,8 @@ var logger = require('morgan');
 var hbs = require('hbs'); // importação do hbs
 
 var indexRouter = require('./routes/rotasIndex');
+var demandasRouter = require('./routes/rotasDemandas');
+
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -24,6 +26,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/demandas', demandasRouter);
+
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
