@@ -1,0 +1,24 @@
+{{> navbar }}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Nova Demanda</h5>
+        <form method="POST" action="/demandas/cria">
+            <div class="mb-3 row">
+                <div class="col-md-8">
+                    <label class="form-label">Título</label>
+                    <input type="text" name="titulo" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Urgência</label>
+                    <input type="number" name="urgencia" class="form-control" min="1" max="5" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Texto</label>
+                <textarea name="texto" class="form-control" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+</div>

@@ -26,12 +26,12 @@ Demanda.init( // Construtor com a definição dos atributos
         updatedAt: 'atualizada_em',  // nome do atributo 'updatedAt'
     },
 );
-
-sequelize.sync({ alter: true }).then(() => {
-    // alter: true, para aplica alterações de código no Banco de Dados
-    console.log('Modelos sincronizados com o bando de dados.');
-}).catch((error) => {
-    console.error('Erro ao sincronizar modelos com o banco de dados: ', error);
-});
+// RODO ESTE COMANDO APENAS UMA VEZ DEPOIS EU CRIO UM COMENTÁRIO NESTAS LINHAS E USO APENAS SE PRECISAR SINCRONIZAR ALGUM DADO COM O BANCO DE DADOS
+// sequelize.sync({ alter: true }).then(() => {
+//     // alter: true, para aplica alterações de código no Banco de Dados
+//     console.log('Modelos sincronizados com o bando de dados.');
+// }).catch((error) => {
+//     console.error('Erro ao sincronizar modelos com o banco de dados: ', error);
+// });
 
 module.exports = Demanda;

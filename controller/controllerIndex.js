@@ -5,11 +5,11 @@ const Demanda = require('../model/modelos.js');
 exports.tela_principal = async function (req, res){
 
     // Criando uma nova demanda, utilizando o método do Sequelize
-    await Demanda.create({
-        titulo: 'Primeira demanda',
-        texto: 'Texto da primeira demanda',
-        urgencia: 3,
-    })
+    // await Demanda.create({
+    //     titulo: 'Primeira demanda',
+    //     texto: 'Texto da primeira demanda',
+    //     urgencia: 3,
+    // })
 
     // Lista todas as demandas utilizando o método do Sequelize
     const demandas = await Demanda.findAll();

@@ -9,11 +9,11 @@ const sequelize = new Sequelize(
         dialect: 'mysql'    // dialeto do Banco de Dados
     }
 );
-
-sequelize.authenticate().then(() => {
-    console.log('Conexão com banco de dados estabelecida com sucesso.');
-}).catch((error) => {
-    console.error('Erro ao se conectar ao banco de dados: ', error);
-})
+// APÓS TESTAR EU FAÇO UM COMENTÁRIO NESTAS LINHAS QUE TESTA O SERVIDOR
+// sequelize.authenticate().then(() => {
+//     console.log('Conexão com banco de dados estabelecida com sucesso.');
+// }).catch((error) => {
+//     console.error('Erro ao se conectar ao banco de dados: ', error);
+// })
 
 module.exports = sequelize; // exportar o módulo server.sequelize
