@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('hbs'); // importação do hbs
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/rotasIndex');
 // var usersRouter = require('./routes/users');
 
 var app = express();
