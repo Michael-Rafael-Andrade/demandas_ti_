@@ -47,7 +47,12 @@ exports.cria_post = async function (req, res) {
 };
 
 exports.consulta = async function (req, res) {
-    const id_demanda = req.params.id;
+    const id_demanda = Number(req.params.id);
+
+    // validação do parâmetro id (deve ser inteiro positivo)
+    if(!id_demanda || Number.isNaN(id_demanda) || !Number.isInteger(id_demanda) || id_demanda <= 0){
+        return res.status(400).send('ID inválido');
+    }
 
     try {
         const demanda = await Demanda.findByPk(id_demanda);
@@ -70,8 +75,17 @@ exports.consulta = async function (req, res) {
 };
 
 exports.altera_status = async function (req, res) {
-    const id_demanda = req.params.id;
+    const id_demanda = Number(req.params.id);
     const novo_status = req.params.novo_status;
+
+    // validação dos parâmetros
+    const status_permitidos = ['pendente', 'em_andamento', 'concluido'];
+    if(!id_demanda || Number.isNaN(id_demanda) || !Number.isInteger(id_demanda) || id_demanda <= 0){
+        return res.status(400).send('ID inválido');
+    }
+    if(!status_permitidos.includes(novo_status)){
+        return res.status(400).send('Status inválido');
+    }
 
     try {
         await Demanda.update(
