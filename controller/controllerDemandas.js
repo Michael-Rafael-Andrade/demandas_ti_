@@ -15,9 +15,30 @@ exports.cria_post = async function (req, res) {
         urgencia: req.body.urgencia,
         // status padrão 'pendente', definido no modelo
     };
+    // validação simples no controller
+    const erros = [];
+    if(!nova_demanda.titulo || nova_demanda.titulo.trim() === ''){
+        erros.push({ msg: 'Título é obrgatório' });
+    }
+    if(!nova_demanda.texto || nova_demanda.texto.trim() === ''){
+        erros.push({ msg: 'Texto é obrigatório'});
+    }
+    const urg = Number(nova_demanda.urgencia);
+    if(!nova_demanda.urgencia || Number.isNaN(urg) || urg < 1 || urg > 5){
+        erros.push({ msg: 'Urgência deve ser um número entre 1 e 5'});
+    }
+
+    if(erros.length > 0){
+        const contexto = {
+            titulo_pagina: 'Criar nova demanda',
+            erros: erros,
+            old: { titulo: nova_demanda.titulo, texto: nova_demanda.texto, urgencia: nova_demanda.urgencia }
+        };
+        return res.status(400).render('cria_demanda', contexto);
+    }
 
     try {
-        await Demanda.create(nova_demanda);
+        await Demanda.create({titulo: nova_demanda.titulo, texto: nova_demanda.texto, urgencia: urg });
         return res.redirect('/');
     } catch (error) {
         console.error('Erro ao criar demanda: ', error);
