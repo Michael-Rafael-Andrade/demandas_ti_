@@ -27,18 +27,26 @@ exports.cria_post = async function (req, res) {
 
 exports.consulta = async function (req, res) {
     const id_demanda = req.params.id;
-    const demanda = await Demanda.findByPk(id_demanda);
 
-    // formata a data de criação de cada demanda para o formato brasileiro
-    demanda.criada_em_fmt = new Date(demanda.criada_em).toLocaleDateString('pt-BR');
+    try {
+        const demanda = await Demanda.findByPk(id_demanda);
+        if (!demanda) {
+            return res.status(404).send('Demanda não encontrada');
+        }
 
-    const contexto = {
-        titulo_pagina: "Detalhes da Demanda",
-        demanda: demanda,
-    }
+        // formata a data de criação de cada demanda para o formato brasileiro
+        demanda.criada_em_fmt = new Date(demanda.criada_em).toLocaleDateString('pt-BR');
 
-    res.render('consulta_demanda', contexto);
-}
+        const contexto = {
+            titulo_pagina: "Detalhes da Demanda",
+            demanda: demanda,
+        };
+        return res.render('consulta_demanda', contexto);
+    } catch(error){
+        console.error('Erro ao recuperar demanda: ', error);
+        return res.status(500).send('Erro ao recuperar demanda');
+    }    
+};
 
 exports.altera_status = async function (req, res) {
     const id_demanda = req.params.id;
